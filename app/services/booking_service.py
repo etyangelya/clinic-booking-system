@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 
 from fastapi import HTTPException
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 
 from app.core.exceptions import (
     AlreadyCancelledError,
@@ -132,7 +132,13 @@ def create_booking(db: Session, payload: BookingRequest) -> tuple[Appointment, s
     except IntegrityError:
         db.rollback()
         raise SlotTakenError()
-    db.refresh(appointment)
+
+    appointment = (
+        db.query(Appointment)
+        .options(joinedload(Appointment.patient), joinedload(Appointment.doctor))
+        .filter(Appointment.id == appointment.id)
+        .one()
+    )
     return appointment, raw_token
 
 

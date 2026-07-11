@@ -15,6 +15,9 @@ class Settings(BaseSettings):
     smtp_password: str | None = None
     smtp_from_email: str | None = None
 
+    resend_api_key: str | None = None
+    resend_from_email: str | None = None
+
     rate_limit_booking: str = "5/minute"
     rate_limit_default: str = "60/minute"
 
