@@ -1,6 +1,5 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
-from sqlalchemy.pool import NullPool
 
 from app.config import settings
 
@@ -9,7 +8,8 @@ _is_sqlite = bool(settings.database_url and settings.database_url.startswith("sq
 
 engine = create_engine(
     settings.database_url,
-    poolclass=NullPool if _is_postgres else None,
+    pool_pre_ping=True,
+    pool_recycle=1800,
     connect_args=(
         {"check_same_thread": False, "timeout": 30}
         if _is_sqlite
@@ -18,7 +18,7 @@ engine = create_engine(
         else {}
     ),
 )
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, expire_on_commit=False, bind=engine)
 Base = declarative_base()
 
 

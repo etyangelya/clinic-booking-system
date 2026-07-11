@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 
 from fastapi import HTTPException
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy.orm import Session, joinedload
+from sqlalchemy.orm import Session
 
 from app.core.exceptions import (
     AlreadyCancelledError,
@@ -126,19 +126,17 @@ def create_booking(db: Session, payload: BookingRequest) -> tuple[Appointment, s
         link_token_hash=hash_token(raw_token),
         link_expires_at=payload.slot_time,
     )
+    # Attach the already-loaded doctor/patient in memory so callers (e.g. the
+    # background email task) can read them after this session closes, without
+    # an extra round trip or a lazy-load on a detached instance.
+    appointment.doctor = doctor
+    appointment.patient = patient
     db.add(appointment)
     try:
         db.commit()
     except IntegrityError:
         db.rollback()
         raise SlotTakenError()
-
-    appointment = (
-        db.query(Appointment)
-        .options(joinedload(Appointment.patient), joinedload(Appointment.doctor))
-        .filter(Appointment.id == appointment.id)
-        .one()
-    )
     return appointment, raw_token
 
 
