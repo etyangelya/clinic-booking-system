@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@theme {
+  --color-page: #ffffff;
+  --color-card: #f0f5fd;
+  --color-line: #d8dee8;
+  --color-ink: #2e2e38;
+  --color-label: #8a93a3;
+  --color-brand-start: #8c0281;
+  --color-brand-end: #5f2888;
+
+  --shadow-card: 0 8px 24px rgba(20, 30, 60, 0.08);
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, 'Segoe UI', Roboto, sans-serif;
+  background: var(--color-page);
+  color: var(--color-ink);
+}
+
+#root {
+  min-height: 100svh;
+}
