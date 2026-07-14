@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     app_name: str = "Clinic Booking System"
     database_url: str | None = None
     secret_key: str = "dev-secret-key-change-me"
-    frontend_origins: str = "http://localhost:5173"
+    frontend_origins: str = "https://clinic-booking-system-jade.vercel.app/"
     # Base URL of the deployed frontend, used to build links sent in emails
     # (e.g. the booking confirmation link). Change this when deploying to
     # Vercel or a custom domain. Falls back to the first FRONTEND_ORIGINS
