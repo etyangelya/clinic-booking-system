@@ -18,7 +18,6 @@ export default function BookingPage() {
   const [symptoms, setSymptoms] = useState(null)
   const [matchInfo, setMatchInfo] = useState(null)
   const [selectedSlot, setSelectedSlot] = useState(null)
-  const [consent, setConsent] = useState(false)
 
   const [modalOpen, setModalOpen] = useState(false)
   const [submitting, setSubmitting] = useState(false)
@@ -32,7 +31,6 @@ export default function BookingPage() {
     setSymptoms(null)
     setMatchInfo(null)
     setSelectedSlot(null)
-    setConsent(false)
   }
 
   const handleModeChange = (mode) => {
@@ -41,37 +39,30 @@ export default function BookingPage() {
     setSymptoms(null)
     setMatchInfo(null)
     setSelectedSlot(null)
-    setConsent(false)
   }
 
   const handleDoctorSelect = (doctor) => {
     setSelectedDoctor(doctor)
     setSelectedSlot(null)
-    setConsent(false)
   }
 
   const handleSymptomsCommit = (text) => {
     setSymptoms(text)
     setSelectedSlot(null)
-    setConsent(false)
   }
 
   const handleSlotSelect = (slot) => {
     setSelectedSlot(slot)
-    setConsent(false)
   }
 
-  const handleConsentChange = (checked) => {
-    setConsent(checked)
-    if (checked && selectedSlot) {
-      setSubmitError(null)
-      setModalOpen(true)
-    }
+  const handleContinue = () => {
+    if (!selectedSlot) return
+    setSubmitError(null)
+    setModalOpen(true)
   }
 
   const handleModalClose = () => {
     setModalOpen(false)
-    setConsent(false)
   }
 
   const fetchGeneralSlots = useCallback(
@@ -120,7 +111,6 @@ export default function BookingPage() {
     setSymptoms(null)
     setMatchInfo(null)
     setSelectedSlot(null)
-    setConsent(false)
     setAppointment(null)
     setSubmitError(null)
   }
@@ -165,8 +155,7 @@ export default function BookingPage() {
                     fetchSlots={slotFetcher}
                     selectedSlot={selectedSlot}
                     onSelectSlot={handleSlotSelect}
-                    consent={consent}
-                    onConsentChange={handleConsentChange}
+                    onContinue={handleContinue}
                   />
                 )}
               </div>

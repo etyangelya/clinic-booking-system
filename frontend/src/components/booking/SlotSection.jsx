@@ -1,9 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import Section from './Section'
+import Button from '../ui/Button'
 import { bucketSlots, formatTime, TIME_PERIODS, toDateInputValue } from '../../utils/slots'
-
-const CONSENT_TEXT =
-  'I agree to share these details with the clinic so my appointment can be confirmed and managed.'
 
 export default function SlotSection({
   title,
@@ -11,9 +9,7 @@ export default function SlotSection({
   fetchSlots,
   selectedSlot,
   onSelectSlot,
-  consent,
-  onConsentChange,
-  showConsent = true,
+  onContinue,
 }) {
   const [date, setDate] = useState(() => toDateInputValue(new Date()))
   const [slots, setSlots] = useState([])
@@ -114,23 +110,20 @@ export default function SlotSection({
           </div>
         )}
 
-        {selectedSlot?.doctorName && (
-          <p className="text-sm text-label">
-            You&apos;ll see <span className="font-medium text-ink">{selectedSlot.doctorName}</span>.
-          </p>
-        )}
-
-        {showConsent && (
-          <label className={`flex items-start gap-3 text-sm text-label ${selectedSlot ? '' : 'cursor-not-allowed opacity-40'}`}>
-            <input
-              type="checkbox"
-              checked={consent}
-              disabled={!selectedSlot}
-              onChange={(event) => onConsentChange(event.target.checked)}
-              className="mt-0.5 h-4 w-4 rounded border-line accent-brand-start focus:ring-brand-start/40"
-            />
-            <span>{CONSENT_TEXT}</span>
-          </label>
+        {selectedSlot && onContinue ? (
+          <div className="flex flex-col items-start gap-2">
+            <div className="flex items-start gap-3">
+            </div>
+            <Button type="button" onClick={onContinue} className="mt-4 w-full">
+              Proceed to book
+            </Button>
+          </div>
+        ) : (
+          selectedSlot?.doctorName && (
+            <p className="text-sm text-label">
+              You&apos;ll see <span className="font-medium text-ink">{selectedSlot.doctorName}</span>.
+            </p>
+          )
         )}
       </div>
     </Section>

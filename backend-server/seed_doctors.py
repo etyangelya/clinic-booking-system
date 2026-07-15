@@ -15,7 +15,7 @@ SLOT_DURATION_MINUTES = 30
 # staggered across the week so the clinic has day coverage every day.
 DOCTORS = [
     {
-        "name": "Dr. Tom Kamau",
+        "name": "Tom Kamau",
         "specialty": "General Medicine",
         "is_general": True,
         "email": "tom.kamau@clinic.com",
@@ -23,7 +23,7 @@ DOCTORS = [
         "working_days": [0, 1, 2, 3],  # Mon-Thu
     },
     {
-        "name": "Dr. Grace Wanjiru",
+        "name": "Grace Wanjiru",
         "specialty": "General Medicine",
         "is_general": True,
         "email": "grace.wanjiru@clinic.com",
@@ -31,7 +31,7 @@ DOCTORS = [
         "working_days": [2, 3, 4, 5],  # Wed-Sat
     },
     {
-        "name": "Dr. Peter Otieno",
+        "name": "Peter Otieno",
         "specialty": "General Medicine",
         "is_general": True,
         "email": "peter.otieno@clinic.com",
@@ -39,7 +39,7 @@ DOCTORS = [
         "working_days": [0, 2, 4, 5],  # Mon, Wed, Fri, Sat nights
     },
     {
-        "name": "Dr. Faith Cherono",
+        "name": "Faith Cherono",
         "specialty": "Dermatology",
         "is_general": False,
         "email": "faith.cherono@clinic.com",
@@ -47,7 +47,7 @@ DOCTORS = [
         "working_days": [4, 5, 6, 0],  # Fri-Mon
     },
     {
-        "name": "Dr. Hiroshi Tanaka",  # the one foreign name among the five
+        "name": "Hiroshi Tanaka",  # the one foreign name among the five
         "specialty": "Dentistry",
         "is_general": False,
         "email": "hiroshi.tanaka@clinic.com",
