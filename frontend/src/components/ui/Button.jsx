@@ -1,5 +1,5 @@
 const VARIANTS = {
-  primary: 'bg-linear-to-r from-brand-start to-brand-end text-white hover:opacity-90',
+  primary: 'bg-brand-end text-white opacity-[85%] hover:bg-brand-start',
   secondary: 'bg-card text-ink border border-line hover:bg-line/30',
 }
 

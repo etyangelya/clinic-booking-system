@@ -4,14 +4,18 @@ import Button from '../ui/Button'
 const inputClass =
   'w-full rounded-xl border border-line bg-page px-4 py-3 text-sm text-ink focus:border-brand-start focus:outline-none focus:ring-2 focus:ring-brand-start/20'
 
+const CONSENT_TEXT =
+  'I agree to share these details with the clinic so my appointment can be confirmed and managed.'
+
 export default function PatientDetailsModal({ open, onClose, onSubmit, submitting, error }) {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
+  const [agreed, setAgreed] = useState(false)
 
   if (!open) return null
 
-  const canSubmit = name.trim().length > 0 && email.trim().length > 0
+  const canSubmit = name.trim().length > 0 && email.trim().length > 0 && agreed
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -56,6 +60,16 @@ export default function PatientDetailsModal({ open, onClose, onSubmit, submittin
             placeholder="Email address"
             className={inputClass}
           />
+
+          <label className="flex items-start gap-3 text-sm text-label @sm:col-span-2">
+            <input
+              type="checkbox"
+              checked={agreed}
+              onChange={(event) => setAgreed(event.target.checked)}
+              className="mt-0.5 h-4 w-4 rounded border-line accent-brand-start focus:ring-brand-start/40"
+            />
+            <span>{CONSENT_TEXT}</span>
+          </label>
 
           {error && <p className="text-sm text-red-500 @sm:col-span-2">{error}</p>}
 

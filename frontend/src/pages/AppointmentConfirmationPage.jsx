@@ -270,7 +270,6 @@ function RescheduleForm({ appointment, token, onRescheduled, onBack }) {
         fetchSlots={fetchSlots}
         selectedSlot={newSlot}
         onSelectSlot={setNewSlot}
-        showConsent={false}
       />
 
       <div>
