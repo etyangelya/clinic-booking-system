@@ -115,7 +115,7 @@ Combined with `SELECT ... FOR UPDATE` on the doctor row inside a transaction whe
 
 ## 2. Architecture Diagram
 
-> ![alt text](<system design.png>)
+> ![alt text]![alt text](<system design.png>)
 >
 > _Shows: Patient/Doctor clients → API Gateway → Backend Application (Booking Engine, Cancellation Service, Reschedule Service, Leave Service) → PostgreSQL, plus the async path via fastapi background task → Notification Service → Email Provider._
 
@@ -123,7 +123,7 @@ Combined with `SELECT ... FOR UPDATE` on the doctor row inside a transaction whe
 
 ## 3. Security-Centric Data Flow
 
-> ![alt text](<security centric data flow diagram.png>)
+> ![alt text]![alt text](<security centric data flow diagram.png>)
 >
 > _Shows trust boundaries (Public Internet → Edge/Gateway → Trusted Backend → Data Zone → Third-Party Email) and the specific control applied at each boundary crossing._
 
@@ -140,7 +140,7 @@ Combined with `SELECT ... FOR UPDATE` on the doctor row inside a transaction whe
 
 ## 4. User Experience Flow
 
-> ![alt text](<userflow diagram.png>)
+> ![alt text]![alt text](<userflow diagram.png>)
 >
 > _Shows: General vs. Specialist path → slot selection → guest booking form → confirmation email with magic link → view/cancel/reschedule via link._
 
